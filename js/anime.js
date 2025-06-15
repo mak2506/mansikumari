@@ -1,6 +1,6 @@
   const images = [
-    './img/17499637241338tgmfvs9.webp',
-    './img/1749963622957bx6tog4d.webp'
+    'img/17499637241338tgmfvs9.webp',
+    'img/1749963622957bx6tog4d.webp'
   ];
 
   const heroSection = document.getElementById('heroSection');
