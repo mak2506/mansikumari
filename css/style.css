@@ -1,0 +1,180 @@
+:root {
+  --accent-start: #203a43;
+  --accent-end: #2c5364;
+  --accent-text-start: #00f0ff;
+  --accent-text-end: #ff00cc;
+}
+
+
+body {
+  background-color: #010101;
+  scroll-behavior: smooth;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.hero-section {
+  height: 100vh;
+  /* background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); */
+  /* background: linear-gradient(110deg, #000000,  var(--accent-start), var(--accent-end)); */
+  color: white;
+  padding-top: 100px;
+  background-image:
+    url('../img/17499637241338tgmfvs9.webp'),  /* Top layer (transparent image) */
+     linear-gradient(110deg, #000000,  var(--accent-start), var(--accent-end)); /* Bottom layer (gradient) */
+    
+  background-repeat: no-repeat;
+  background-size: contain, cover; 
+  
+}
+
+.text-gradient {
+  /* background: linear-gradient(45deg, #00f0ff, #ff00cc); */
+  background: linear-gradient(45deg,  var(--accent-text-end), var(--accent-text-start));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.progressBar {
+  background: linear-gradient(45deg,  var(--accent-text-end), var(--accent-text-start));
+
+}
+
+h2 {
+  font-weight: 700;
+  color: #fff;
+}
+
+.progress {
+  background-color: #333;
+  height: 1.2rem;
+}
+
+.progress-bar {
+  font-size: 0.9rem;
+  font-weight: 500;
+   height: 100%;
+  width: 0; /* Start empty */
+  border-radius: 12px;
+  transition: width 2s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+.blockDiv
+{
+  /* background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); */
+  background: linear-gradient(135deg, #000000,  var(--accent-start), var(--accent-end));
+}
+
+
+
+#education h5,
+#achievements h5 {
+  color: #fff;
+}
+
+.bg-black {
+  background-color: #1a1a1a !important;
+}
+
+ #skills, #achievements, #blogs {
+    background: linear-gradient(180deg, #1f1f20, #080808, #1f1f20);
+  /* background: linear-gradient(135deg, #000000,  var(--accent-start), var(--accent-end)); */
+
+}
+
+#summary{
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+              url('../img/1749967966861a2zvnp6l.webp');
+  height: 90vh;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: 100%;
+}
+
+i.text-gradient {
+  /* background: linear-gradient(45deg, #00f0ff, #ff00cc); */
+  background: linear-gradient(110deg, #000000,  var(--accent-start), var(--accent-end));
+
+  -webkit-background-clip: text;
+  /* -webkit-text-fill-color: transparent; */
+}
+
+input, textarea {
+  color: #fff;
+}
+input::placeholder, textarea::placeholder {
+  color: #aaa;
+}
+
+.hobbiesDiv
+{
+    /* background: linear-gradient(180deg, #1f1f20, #080808, #1f1f20); */
+  background: linear-gradient(110deg, #000000,  var(--accent-start), var(--accent-end));
+
+}
+
+
+
+.footer a {
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: var(--accent-start); /* your theme accent */
+  text-shadow: 0 0 5px var(--accent-start);
+}
+
+#colorPicker {
+  width: 35px;
+  height: 35px;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+/* Optional: Hide the default swatch on Chrome */
+#colorPicker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+#colorPicker::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+#colorPicker:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px var(--accent-start);
+}
+
+.card {
+  background: linear-gradient(110deg, #000000,  var(--accent-start), var(--accent-end));
+
+}
+
+.video {
+  width: 50%;
+}
+
+
+#typed::after {
+  content: '|';
+  animation: blink 0.7s infinite;
+  margin-left: 5px;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+
+
+
+
+
