@@ -1,21 +1,26 @@
-  const images = [
-    'img/17499637241338tgmfvs9.webp',
-    'img/1749963622957bx6tog4d.webp'
-  ];
+const images = [
+  'img/17499637241338tgmfvs9.webp',
+  'img/1749963622957bx6tog4d.webp'
+];
 
-  const heroSection = document.getElementById('heroSection');
-  let indexH = 0;
+const overlayImage = document.querySelector('.overlay-image');
+let indexH = 0;
 
-  function updateBackground() {
-    const image = `url(${images[indexH]})`;
-    const gradient = `linear-gradient(110deg, #000000, var(--accent-start), var(--accent-end))`;
+function updateBackground() {
+  // Set image and fade in
+  overlayImage.style.backgroundImage = `url(${images[indexH]})`;
+  overlayImage.style.opacity = 1;
 
-    heroSection.style.backgroundImage = `${image}, ${gradient}`;
-    indexH = (indexH + 1) % images.length;
-  }
+  // Fade out after transition (2 sec later)
+  setTimeout(() => {
+    overlayImage.style.opacity = 0;
+  }, 6500); // matches transition duration
 
-  // Initial background
-  updateBackground();
+  indexH = (indexH + 1) % images.length;
+}
 
-  // Change every 5 seconds
-  setInterval(updateBackground, 5000);
+// Initial background
+updateBackground();
+
+// Change every 5 seconds
+setInterval(updateBackground, 8000);

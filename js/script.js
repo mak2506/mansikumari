@@ -171,7 +171,7 @@ function getSplitComplementaryColors(hex) {
   ];
 }
 
-const text = "Full Stack Developer • Software Engineer • Author • E-commerce Integrations";
+const text = "Full Stack Developer • Software Engineer • Author • Blogger";
   const target = document.getElementById("typed");
   let index = 0;
 
