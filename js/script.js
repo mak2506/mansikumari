@@ -1,202 +1,320 @@
-function validateForm() {
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const message = document.getElementById("message").value.trim();
+/* ==========================================
+   MANSI KUMARI PORTFOLIO - INTERACTIVE JS
+   Particle Mesh, Color Grading, Counter & UI
+   ========================================== */
 
-  if (!name || !email || !message) {
-    alert("Please fill out all fields.");
-    return false;
-  }
-
-  alert("Message sent! (Simulation)");
-  return false; // Prevent actual submission
-}
-
-
-const colorPicker = document.getElementById("colorPicker");
-
-// Load saved custom accent if exists
-// const accentColorStart = localStorage.getItem("accentColorStart");
-// const accentColorEnd = localStorage.getItem("accentColorEnd");
-// if (accentColorStart && accentColorEnd) {
-//   document.documentElement.style.setProperty('--accent-start', accentColorStart);
-//   document.documentElement.style.setProperty('--accent-end', accentColorEnd);
-//   colorPicker.value = savedAccent;
-// }
-
-colorPicker.addEventListener("input", () => {
-  const color = colorPicker.value;
-  document.documentElement.style.setProperty('--accent-start', darkenColor(color));
-  document.documentElement.style.setProperty('--accent-end', color);
-  const textColor = getSplitComplementaryColors(color);
-  console.log(textColor);
-  document.documentElement.style.setProperty('--accent-text-end', textColor);
-  document.documentElement.style.setProperty('--accent-text-start', darkenColor(textColor));
-
-
-  // localStorage.setItem("accentColorStart", darkenColor(color));
-  // localStorage.setItem("accentColorEnd", color);
+document.addEventListener("DOMContentLoaded", () => {
+  initParticleCanvas();
+  initTypewriter();
+  initScrollEffects();
+  initStatCounters();
+  initSkillObserver();
+  initSavedTheme();
 });
 
-function darkenColor(hex, percent = 15) {
-  // Remove "#" if present
-  hex = hex.replace('#', '');
-
-  // Parse the R, G, B components
-  let r = parseInt(hex.substring(0, 2), 16);
-  let g = parseInt(hex.substring(2, 4), 16);
-  let b = parseInt(hex.substring(4, 6), 16);
-
-  // Decrease each component by the percent
-  r = Math.max(0, Math.floor(r * (1 - percent / 100)));
-  g = Math.max(0, Math.floor(g * (1 - percent / 100)));
-  b = Math.max(0, Math.floor(b * (1 - percent / 100)));
-
-  // Convert back to hex and return
-  const toHex = (c) => c.toString(16).padStart(2, '0');
-  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+/* ------------------------------------------
+   1. Theme Presets & Custom Color Picker
+   ------------------------------------------ */
+function setTheme(themeName) {
+  document.documentElement.setAttribute("data-theme", themeName);
+  localStorage.setItem("portfolio_theme", themeName);
 }
 
-// function hexToHSL(hex) {
-//   hex = hex.replace('#', '');
-//   let r = parseInt(hex.slice(0, 2), 16) / 255;
-//   let g = parseInt(hex.slice(2, 4), 16) / 255;
-//   let b = parseInt(hex.slice(4, 6), 16) / 255;
-
-//   let max = Math.max(r, g, b), min = Math.min(r, g, b);
-//   let h, s, l = (max + min) / 2;
-
-//   if (max === min) {
-//     h = s = 0;
-//   } else {
-//     let d = max - min;
-//     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-//     switch (max) {
-//       case r: h = ((g - b) / d + (g < b ? 6 : 0)); break;
-//       case g: h = ((b - r) / d + 2); break;
-//       case b: h = ((r - g) / d + 4); break;
-//     }
-//     h *= 60;
-//   }
-
-//   return { h, s: s * 100, l: l * 100 };
-// }
-
-// function hslToHex(h, s, l) {
-//   s /= 100;
-//   l /= 100;
-
-//   let c = (1 - Math.abs(2 * l - 1)) * s;
-//   let x = c * (1 - Math.abs((h / 60) % 2 - 1));
-//   let m = l - c / 2;
-
-//   let r, g, b;
-
-//   if (h < 60) [r, g, b] = [c, x, 0];
-//   else if (h < 120) [r, g, b] = [x, c, 0];
-//   else if (h < 180) [r, g, b] = [0, c, x];
-//   else if (h < 240) [r, g, b] = [0, x, c];
-//   else if (h < 300) [r, g, b] = [x, 0, c];
-//   else [r, g, b] = [c, 0, x];
-
-//   const toHex = n => Math.round((n + m) * 255).toString(16).padStart(2, '0');
-//   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-// }
-
-// function getComplementaryColor(hex) {
-//   const hsl = hexToHSL(hex);
-//   let compHue = (hsl.h + 180) % 360;
-
-//   // Boost saturation and lightness a bit
-//   let compSat = Math.min(100, hsl.s + 20);
-//   let compLight = hsl.l < 30 ? 50 : hsl.l;
-
-//   return hslToHex(compHue, compSat, compLight);
-// }
-
-
-function hexToHSL(hex) {
-  hex = hex.replace('#', '');
-  let r = parseInt(hex.substr(0,2),16) / 255;
-  let g = parseInt(hex.substr(2,2),16) / 255;
-  let b = parseInt(hex.substr(4,2),16) / 255;
-
-  let max = Math.max(r,g,b), min = Math.min(r,g,b);
-  let h, s, l = (max + min)/2;
-
-  if(max === min){
-    h = s = 0;
-  } else {
-    let d = max - min;
-    s = l > 0.5 ? d / (2-max-min) : d / (max+min);
-    switch(max){
-      case r: h = (g-b)/d + (g < b ? 6 : 0); break;
-      case g: h = (b-r)/d + 2; break;
-      case b: h = (r-g)/d + 4; break;
-    }
-    h *= 60;
+function initSavedTheme() {
+  const savedTheme = localStorage.getItem("portfolio_theme");
+  if (savedTheme) {
+    document.documentElement.setAttribute("data-theme", savedTheme);
   }
 
-  return { h, s: s * 100, l: l * 100 };
-}
-
-function hslToHex(h, s, l) {
-  s /= 100;
-  l /= 100;
-
-  let c = (1 - Math.abs(2 * l - 1)) * s;
-  let x = c * (1 - Math.abs((h / 60) % 2 - 1));
-  let m = l - c/2;
-  let r, g, b;
-
-  if (h < 60) [r,g,b] = [c,x,0];
-  else if (h < 120) [r,g,b] = [x,c,0];
-  else if (h < 180) [r,g,b] = [0,c,x];
-  else if (h < 240) [r,g,b] = [0,x,c];
-  else if (h < 300) [r,g,b] = [x,0,c];
-  else [r,g,b] = [c,0,x];
-
-  const toHex = (n) => Math.round((n+m)*255).toString(16).padStart(2, '0');
-  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-}
-
-function getSplitComplementaryColors(hex) {
-  const hsl = hexToHSL(hex);
-  const h1 = (hsl.h + 100) % 360;
-  const h2 = (hsl.h + 200) % 360;
-
-  return [
-    hslToHex(h1, hsl.s, Math.min(80, hsl.l + 10)),
-    hslToHex(h2, hsl.s, Math.min(80, hsl.l + 10))
-  ];
-}
-
-const text = "Full Stack Developer • Software Engineer • Author • Blogger";
-  const target = document.getElementById("typed");
-  let index = 0;
-
-  function type() {
-    if (index < text.length) {
-      target.textContent += text.charAt(index);
-      index++;
-      setTimeout(type, 100); // Typing speed
-    }
-  }
-
-type();
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bar = entry.target;
-        const value = bar.getAttribute('data-progress');
-        bar.style.width = value + '%';
-        observer.unobserve(bar); // Animate only once
-      }
+  const colorPicker = document.getElementById("colorPicker");
+  if (colorPicker) {
+    colorPicker.addEventListener("input", (e) => {
+      const color = e.target.value;
+      applyCustomAccent(color);
     });
-  }, { threshold: 0.5 });
+  }
+}
 
-  document.querySelectorAll('.progress-bar').forEach(bar => {
-    observer.observe(bar);
+function applyCustomAccent(hex) {
+  document.documentElement.removeAttribute("data-theme");
+  document.documentElement.style.setProperty("--accent-end", hex);
+  document.documentElement.style.setProperty("--accent-glow", `${hex}40`);
+  document.documentElement.style.setProperty("--border-glow", `${hex}60`);
+  document.documentElement.style.setProperty(
+    "--text-gradient",
+    `linear-gradient(135deg, ${hex} 0%, #a855f7 100%)`
+  );
+  document.documentElement.style.setProperty(
+    "--accent-gradient",
+    `linear-gradient(135deg, ${hex}, #7000ff)`
+  );
+}
+
+/* ------------------------------------------
+   2. Background Particle Network Canvas
+   ------------------------------------------ */
+function initParticleCanvas() {
+  const canvas = document.getElementById("particleCanvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener("resize", () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
   });
 
+  const particleCount = Math.min(Math.floor(width / 25), 50);
+  const particles = [];
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      radius: Math.random() * 2 + 1,
+      alpha: Math.random() * 0.5 + 0.2,
+    });
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw connection lines
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 130) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 * (1 - dist / 130)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw particles
+    particles.forEach((p) => {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0, 240, 255, ${p.alpha})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(render);
+  }
+
+  render();
+}
+
+/* ------------------------------------------
+   3. Multi-title Typewriter Effect
+   ------------------------------------------ */
+function initTypewriter() {
+  const target = document.getElementById("typed");
+  if (!target) return;
+
+  const titles = [
+    "Software Engineer • AI System Architect",
+    "Model Context Protocol (MCP) Specialist",
+    "Published Author of 3 Kindle Books",
+    "Full-Stack Integration Developer",
+  ];
+
+  let titleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typeSpeed = 80;
+
+  function typeCycle() {
+    const currentTitle = titles[titleIndex];
+
+    if (isDeleting) {
+      target.textContent = currentTitle.substring(0, charIndex - 1);
+      charIndex--;
+      typeSpeed = 40;
+    } else {
+      target.textContent = currentTitle.substring(0, charIndex + 1);
+      charIndex++;
+      typeSpeed = 80;
+    }
+
+    if (!isDeleting && charIndex === currentTitle.length) {
+      typeSpeed = 2200; // Pause at end of title
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      titleIndex = (titleIndex + 1) % titles.length;
+      typeSpeed = 500;
+    }
+
+    setTimeout(typeCycle, typeSpeed);
+  }
+
+  typeCycle();
+}
+
+/* ------------------------------------------
+   4. Scroll Progress & Back To Top
+   ------------------------------------------ */
+function initScrollEffects() {
+  const progressBar = document.getElementById("scrollProgress");
+  const backToTopBtn = document.getElementById("backToTop");
+  const navLinks = document.querySelectorAll(".navbar-custom .nav-link");
+  const sections = document.querySelectorAll("section, header");
+
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+
+    if (progressBar) {
+      progressBar.style.width = `${progress}%`;
+    }
+
+    if (backToTopBtn) {
+      if (scrollTop > 400) {
+        backToTopBtn.classList.add("visible");
+      } else {
+        backToTopBtn.classList.remove("visible");
+      }
+    }
+
+    // Active link highlighting
+    let current = "";
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 120;
+      if (scrollTop >= sectionTop) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+  });
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ------------------------------------------
+   5. Stat Counters Animation
+   ------------------------------------------ */
+function initStatCounters() {
+  const counters = document.querySelectorAll(".stat-number");
+  let animated = false;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !animated) {
+          animated = true;
+          counters.forEach((counter) => {
+            const target = +counter.getAttribute("data-target");
+            const duration = 2000;
+            const stepTime = 20;
+            const steps = duration / stepTime;
+            const increment = target / steps;
+            let current = 0;
+
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                counter.textContent = target >= 1000 ? `${(target / 1000).toFixed(0)}k+` : `${target}+`;
+                clearInterval(timer);
+              } else {
+                counter.textContent = Math.floor(current);
+              }
+            }, stepTime);
+          });
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  const summarySection = document.getElementById("summary");
+  if (summarySection) observer.observe(summarySection);
+}
+
+/* ------------------------------------------
+   6. Skills Progress Bars & Filtering
+   ------------------------------------------ */
+function initSkillObserver() {
+  const progressBars = document.querySelectorAll(".progress-bar-fill");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          const val = bar.getAttribute("data-progress");
+          bar.style.width = `${val}%`;
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  progressBars.forEach((bar) => observer.observe(bar));
+}
+
+function filterSkills(category, btnElement) {
+  const buttons = document.querySelectorAll(".filter-btn");
+  buttons.forEach((b) => b.classList.remove("active"));
+  if (btnElement) btnElement.classList.add("active");
+
+  const skillItems = document.querySelectorAll(".skill-item");
+  skillItems.forEach((item) => {
+    const itemCat = item.getAttribute("data-category");
+    if (category === "all" || itemCat.includes(category)) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
+
+/* ------------------------------------------
+   7. Copy Email Toast Notification
+   ------------------------------------------ */
+function copyEmail() {
+  const email = "techwithmak25@gmail.com";
+  navigator.clipboard.writeText(email).then(() => {
+    showToast(`Email copied: ${email}`);
+  }).catch(() => {
+    showToast("Email: techwithmak25@gmail.com");
+  });
+}
+
+function showToast(msg) {
+  const toast = document.getElementById("toastAlert");
+  const msgSpan = document.getElementById("toastMessage");
+  if (!toast || !msgSpan) return;
+
+  msgSpan.textContent = msg;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+}
