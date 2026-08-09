@@ -1,77 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="cyber">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mansi Kumari | Portfolio</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <title>Mansi Kumari | Software Engineer & Published Author</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Portfolio of Mansi Kumari - Software Engineer specializing in Python, AI/LLMs, LangGraph, MCP, FastAPI, and Enterprise Backend Systems. Published Author of 3 books." />
+    <meta name="author" content="Mansi Kumari" />
 
-    <!-- Font Awesome CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
-    <!-- Google tag (gtag.js) -->
+
+    <!-- Google Tag Manager -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RF3PYNNMR"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
       gtag('config', 'G-4RF3PYNNMR');
     </script>
   </head>
-  <body class="text-white">
-    <!-- Navbar -->
-    <nav
-      class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top w-100 z-3"
-    >
+  <body>
+    <!-- Top Reading Scroll Progress Bar -->
+    <div id="scrollProgress"></div>
+
+    <!-- Background Animated Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Glass Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom" id="mainNav">
       <div class="container">
-        <a class="navbar-brand fw-bold" href="#">Mansi Kumari</a>
+        <a class="navbar-brand" href="#heroSection">
+          <span class="navbar-brand-dot"></span> Mansi Kumari
+        </a>
         <button
-          class="navbar-toggler"
+          class="navbar-toggler border-0"
+          type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navMenu"
+          aria-controls="navMenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navMenu">
-          <ul class="navbar-nav ms-auto gap-3">
-            <li class="nav-item">
-              <a class="nav-link" href="#summary">Summary</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#experience">Experience</a>
-            </li>
-             <li class="nav-item">
-              <a class="nav-link" href="#skills">Skills</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#education">Education</a>
-            </li>
-             <li class="nav-item">
-              <a class="nav-link" href="#achievements">Achievements</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#projects">Projects</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#blogs">Featured</a>
-            </li>
-            <li class="nav-item">
-              <div class="d-flex justify-content-between m-2">
-                <p>Change Theme:</p>
-                <input
-                  type="color"
-                  id="colorPicker"
-                  class="mx-2"
-                  value="#2c5364"
-                />
+          <ul class="navbar-nav ms-auto gap-2 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="#summary">Summary</a></li>
+            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#blogs">Featured</a></li>
+            <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+            
+            <!-- Color Grading & Theme Selector -->
+            <li class="nav-item dropdown ms-lg-2">
+              <button
+                class="btn btn-outline-glass btn-sm dropdown-toggle d-flex align-items-center gap-2"
+                type="button"
+                id="themeDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-palette-fill text-gradient"></i> Theme
+              </button>
+              <div class="dropdown-menu dropdown-menu-end theme-menu" aria-labelledby="themeDropdown">
+                <div class="small text-muted px-2 mb-2 font-monospace">COLOR GRADING PRESETS</div>
+                <div class="theme-option" onclick="setTheme('cyber')">
+                  <span class="theme-swatch" style="background: linear-gradient(135deg, #00f0ff, #7000ff);"></span>
+                  <span>Cyber Cyan</span>
+                </div>
+                <div class="theme-option" onclick="setTheme('amethyst')">
+                  <span class="theme-swatch" style="background: linear-gradient(135deg, #c084fc, #f43f5e);"></span>
+                  <span>Royal Amethyst</span>
+                </div>
+                <div class="theme-option" onclick="setTheme('emerald')">
+                  <span class="theme-swatch" style="background: linear-gradient(135deg, #34d399, #0284c7);"></span>
+                  <span>Emerald Luxury</span>
+                </div>
+                <div class="theme-option" onclick="setTheme('gold')">
+                  <span class="theme-swatch" style="background: linear-gradient(135deg, #fbbf24, #f97316);"></span>
+                  <span>Midnight Gold</span>
+                </div>
+                <div class="theme-option" onclick="setTheme('rose')">
+                  <span class="theme-swatch" style="background: linear-gradient(135deg, #fb7185, #e879f9);"></span>
+                  <span>Neon Rose</span>
+                </div>
+                <hr class="dropdown-divider border-secondary my-2" />
+                <div class="d-flex align-items-center justify-content-between px-2 pt-1">
+                  <span class="small text-muted">Custom Accent:</span>
+                  <input type="color" id="colorPicker" value="#00f0ff" title="Pick custom color" />
+                </div>
               </div>
             </li>
           </ul>
@@ -80,162 +107,204 @@
     </nav>
 
     <!-- Hero Section -->
-    <header
-      class="hero-section d-flex align-items-center justify-content-center text-start"
-      id="heroSection"
-    >
-     <div class="overlay-image"></div>
-      <div class="container" data-aos="fade-up">
-        <h1 class="display-4 fw-bold" data-aos="slide-left">
-          Hey, I'm <span class="text-gradient">Mansi Kumari</span>
-        </h1>
-        <p class="mt-3">Full-time Developer, Anytime Author</p>
-        <p class="lead mt-2" id="typed">
-          <!-- Full Stack Developer • Software Engineer • Author • E-commerce
-          Integrations -->
-        </p>
+    <header class="hero-section" id="heroSection">
+      <!-- Real-Time Interactive Liquid Wave Flow Canvas -->
+      <canvas id="liquidWaveCanvas"></canvas>
+      <div class="hero-glow-orb"></div>
+      <div class="container hero-content">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7" data-aos="fade-right">
+            <div class="status-badge">
+              <span class="status-dot"></span> Available for AI & Engineering Projects
+            </div>
+            
+            <h1 class="display-3 fw-bold mb-3">
+              Hey, I'm <span class="text-gradient">Mansi Kumari</span>
+            </h1>
+            
+            <p class="fs-4 text-muted-custom mb-3">
+              Full-time Software Engineer • Anytime Author
+            </p>
+            
+            <div class="fs-5 text-light fw-medium mb-4 d-flex align-items-center gap-2" style="min-height: 2.5rem;">
+              <span class="text-gradient"><i class="bi bi-code-square me-2"></i></span>
+              <span id="typed"></span>
+            </div>
+
+            <div class="hero-actions">
+              <a href="#projects" class="btn-glow">
+                <i class="bi bi-rocket-takeoff-fill"></i> View My Work
+              </a>
+              <a href="#summary" class="btn-outline-glass">
+                <i class="bi bi-person-badge"></i> About Me
+              </a>
+              <button onclick="copyEmail()" class="btn-outline-glass">
+                <i class="bi bi-envelope-check"></i> Copy Email
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-5 d-none d-lg-block text-center" data-aos="fade-left">
+            <!-- Frameless Interactive 3D Atomic World & Tech Globe Canvas -->
+            <div class="frameless-atom-container position-relative d-inline-block">
+              <canvas id="heroAtomCanvas" width="420" height="420"></canvas>
+              
+              <div class="d-flex justify-content-center flex-wrap gap-2 mt-2">
+                <span class="glass-pill"><i class="bi bi-cpu-fill text-gradient"></i> AI & Agents</span>
+                <span class="glass-pill"><i class="bi bi-diagram-3-fill text-gradient"></i> 40+ MCP Tools</span>
+                <span class="glass-pill"><i class="bi bi-journal-bookmark-fill text-gradient"></i> 3 Kindle Books</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
-    <!-- Professional Summary -->
+    <!-- Professional Summary & Key Metrics -->
     <section id="summary" class="py-5">
-      <div class="container row" data-aos="fade-up">
-        <div class="col-4">
-          <!-- <video autoplay muted loop playsinline>
-  <source src="img/Animation - 1749923647171.webm" type="video/webm">
-  Your browser does not support the video tag.
-</video> -->
+      <div class="container" data-aos="fade-up">
+        <!-- Stat Counter Grid -->
+        <div class="row g-4 mb-5">
+          <div class="col-6 col-md-3">
+            <div class="glass-card stat-card">
+              <div class="stat-number" data-target="5">0</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="glass-card stat-card">
+              <div class="stat-number" data-target="3">0</div>
+              <div class="stat-label">Published Books</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="glass-card stat-card">
+              <div class="stat-number" data-target="40">0</div>
+              <div class="stat-label">MCP Tools Built</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="glass-card stat-card">
+              <div class="stat-number" data-target="10000">0</div>
+              <div class="stat-label">Merchants Served</div>
+            </div>
+          </div>
         </div>
-        <div class="col-8 text-center text-wrap py-3 my-3">
-          <h2 class="mb-4">Professional Summary</h2>
-          <p class="fs-6">
-            A passionate Software Engineer with 3.5+ years of experience in
-            building scalable integration solutions with real-time data
-            synchronization, primarily in e-commerce platforms. My expertise
-            spans SaaS development, full-stack engineering, database management,
-            modular architecture, and payment gateway integration. I have led
-            and contributed to cross-functional team projects, consistently
-            delivering high-performance, reusable, and clean code.<br />
-            I value deep research, effective planning, and a performance-driven
-            mindset to ensure successful outcomes. With a strong grasp of data
-            structures and coding standards, I approach every task with
-            commitment, responsibility, and a focus on covering all edge cases.
-            Dedicated to continuous learning, I believe in getting 1% better
-            every day.<br />
-            Beyond code, I’m also a published author of three books available on
-            Amazon Kindle—blending creativity and technology in both my
-            professional and personal pursuits.
-          </p>
+
+        <div class="glass-card p-4 p-md-5">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-12">
+              <div class="section-tag">About Me</div>
+              <h2 class="mb-4">Professional Summary</h2>
+              <p class="fs-6 text-muted-custom leading-relaxed mb-4">
+                Software Engineer with <strong>5+ years of experience</strong> designing and building scalable backend systems, enterprise integrations, and AI-powered applications. Strong foundation in system design, problem-solving, software architecture, and end-to-end product development, with expertise in <strong>Python, FastAPI, REST APIs, databases,</strong> and cutting-edge <strong>AI/LLM technologies</strong> including RAG, AI agents, LangChain, LangGraph, and Model Context Protocol (MCP).
+              </p>
+              <p class="fs-6 text-muted-custom leading-relaxed mb-4">
+                A continuous learner who actively explores emerging technologies, adapts quickly to new challenges, and focuses on turning complex problems into practical, reliable, and highly optimized solutions.
+              </p>
+              <div class="d-flex flex-wrap gap-2 pt-2">
+                <span class="glass-pill"><i class="bi bi-cpu text-gradient"></i> AI & Agents</span>
+                <span class="glass-pill"><i class="bi bi-diagram-3 text-gradient"></i> MCP Frameworks</span>
+                <span class="glass-pill"><i class="bi bi-box-seam text-gradient"></i> System Architecture</span>
+                <span class="glass-pill"><i class="bi bi-book text-gradient"></i> Published Kindle Author</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-    <!-- Experience Section -->
+
+    <!-- Experience Timeline -->
     <section id="experience" class="py-5">
       <div class="container" data-aos="fade-up">
-        <h2 class="mb-5 text-center">Experience</h2>
-        <div class="row g-4">
-          <div class="col-md-6">
-            <div
-              class="blockDiv rounded-4 p-4 shadow-sm h-100"
-              data-aos="flip-left"
-            >
-              <h5 class="text-gradient">Software Engineer</h5>
-              <p class="mb-1"><strong>Threecolts</strong> | Lucknow</p>
-              <p class="text-info">Sept 2024 – Present</p>
-              <ul>
-                <li>
-                  Engineered real-time product/order sync services using
-                  webhooks and API triggers, enhancing update speed by 95%.
-                </li>
-                <li>
-                  Optimized system performance, reducing query load and
-                  enhancing data sync efficiency during high-traffic periods
-                  (e.g., holiday sales).
-                </li>
-                <li>
-                  Collaborated in agile teams, conducted code reviews, and
-                  worked cross-functionally with business stakeholders.
-                </li>
+        <div class="section-title-wrap">
+          <div class="section-tag">Career Journey</div>
+          <h2>Professional Experience</h2>
+        </div>
+
+        <div class="timeline">
+          <!-- Experience 1 -->
+          <div class="timeline-item" data-aos="fade-up">
+            <div class="timeline-dot"></div>
+            <div class="glass-card p-4">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <div>
+                  <h4 class="mb-1 text-gradient">Software Engineer</h4>
+                  <p class="mb-0 text-white font-monospace fs-6">
+                    <strong>Threecolts</strong> <span class="text-muted-custom">• Lucknow, India</span>
+                  </p>
+                </div>
+                <span class="company-badge">Sept 2024 – Present</span>
+              </div>
+              <ul class="text-muted-custom fs-6 mb-0 ps-3">
+                <li class="mb-2">Engineered production-grade AI capabilities for Unicon, including automated content generation, intelligent support agents, and semantic RAG solutions using Python, LangGraph, and LangChain.</li>
+                <li class="mb-2">Architected an enterprise Model Context Protocol (MCP) framework with 40+ custom tools and 13 resources, integrating backend services with LLM clients (ChatGPT, Claude, Copilot) via OpenAI Apps SDK.</li>
+                <li class="mb-2">Optimized high-throughput product & order sync for CedCommerce Amazon Channel serving 10,000+ merchants, improving performance by up to 95% and reducing infrastructure costs by 45%.</li>
+                <li class="mb-2">Designed and scaled core billing and payment infrastructure for Unicon with Stripe billing services, handling subscriptions, usage tracking, and activation cycles.</li>
+                <li class="mb-2">Implemented OAuth 2.1-based SSO and centralized authentication across products and AI services with role- and tool-based authorization.</li>
+                <li>Designed interactive SSO user management dashboards and content generation interfaces using React, Tailwind CSS, and shadcn/ui.</li>
               </ul>
             </div>
           </div>
 
-          <div class="col-md-6">
-            <div
-              class="blockDiv rounded-4 p-4 shadow-sm h-100"
-              data-aos="flip-right"
-            >
-              <h5 class="text-gradient">Associate Software Engineer</h5>
-              <p class="mb-1">
-                <strong>Cedcoss Technologies Pvt. Ltd.</strong> | Lucknow
-              </p>
-              <p class="text-info">Jan 2022 – Sept 2024</p>
-              <ul>
-                <li>
-                  Integrated Amazon Bulletin API for automated system alerts and
-                  client communication.
-                </li>
-                <li>
-                  Designed a reusable template-pattern-based payment module,
-                  integrated into 5+ internal SaaS projects.
-                </li>
-                <li>
-                  Developed and maintained Plan & Pricing, billing workflows,
-                  and secure payment handling for a high-scale SaaS integration
-                  platform.
-                </li>
+          <!-- Experience 2 -->
+          <div class="timeline-item" data-aos="fade-up">
+            <div class="timeline-dot"></div>
+            <div class="glass-card p-4">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <div>
+                  <h4 class="mb-1 text-gradient">Associate Software Engineer</h4>
+                  <p class="mb-0 text-white font-monospace fs-6">
+                    <strong>Cedcoss Technologies Pvt. Ltd.</strong> <span class="text-muted-custom">• Lucknow, India</span>
+                  </p>
+                </div>
+                <span class="company-badge">Jan 2022 – Sept 2024</span>
+              </div>
+              <ul class="text-muted-custom fs-6 mb-0 ps-3">
+                <li class="mb-2">Independently architected a centralized global payment platform adopted across multiple organizational apps, standardizing checkout and billing via Shopify Billing APIs and multi-gateway integrations.</li>
+                <li class="mb-2">Engineered enterprise Shopify-Amazon marketplace integrations for thousands of merchants using REST APIs, GraphQL, Shopify APIs, and Amazon APIs.</li>
+                <li class="mb-2">Improved database performance through query tuning and index optimization, implemented MongoDB encryption for PII protection, and executed data migrations.</li>
+                <li>Worked extensively with AWS application infrastructure including SQS, DynamoDB, Parameter Store, CloudWatch, and EKS for high-volume processing.</li>
               </ul>
             </div>
           </div>
 
-          <div class="col-md-6">
-            <div
-              class="blockDiv rounded-4 p-4 shadow-sm h-100"
-              data-aos="flip-left"
-            >
-              <h5 class="text-gradient">Javascript Developer (Intern)</h5>
-              <p class="mb-1"><strong>Data Stats</strong></p>
-              <p class="text-info">Oct 2021 – Jan 2022</p>
-              <ul>
-                <li>
-                  Spearheaded the creation of dynamic code scripts using
-                  JavaScript, enhancing the interactivity of quiz frontend
-                  sections for diverse class groups.
-                </li>
-                <li>
-                  Collaborating closely with the team, I successfully
-                  transformed static HTML pages into dynamic and responsive
-                  interfaces, aligning them with the team's vision.
-                </li>
-                <li>
-                  This experience significantly bolstered my JavaScript skills,
-                  while also equipping me with valuable insights into project
-                  management and effective teamwork.
-                </li>
+          <!-- Experience 3 -->
+          <div class="timeline-item" data-aos="fade-up">
+            <div class="timeline-dot"></div>
+            <div class="glass-card p-4">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <div>
+                  <h4 class="mb-1 text-gradient">Javascript Developer (Intern)</h4>
+                  <p class="mb-0 text-white font-monospace fs-6">
+                    <strong>Data Stats</strong>
+                  </p>
+                </div>
+                <span class="company-badge">Oct 2021 – Jan 2022</span>
+              </div>
+              <ul class="text-muted-custom fs-6 mb-0 ps-3">
+                <li class="mb-2">Spearheaded the creation of dynamic JavaScript scripts to enhance quiz frontend sections.</li>
+                <li>Transformed static HTML pages into dynamic, interactive responsive user interfaces.</li>
               </ul>
             </div>
           </div>
 
-          <div class="col-md-6">
-            <div
-              class="blockDiv rounded-4 p-4 shadow-sm h-100"
-              data-aos="flip-right"
-            >
-              <h5 class="text-gradient">Java Developer (Intern)</h5>
-              <p class="mb-1"><strong>Precursor Info Solutions</strong></p>
-              <p class="text-info">Sept 2021 – Jan 2022</p>
-              <ul>
-                <li>
-                  Developed a college portal using JSP, Servlets, and JDBC,
-                  empha sizing backend-frontend connectivity.
-                </li>
-                <li>
-                  Worked on Eclipse IDE, Apache Server to manage projects, and
-                  SQLWorkbench for database management
-                </li>
-                <li>
-                  Worked on MVC architecture, using REST APIs and data flow.
-                </li>
+          <!-- Experience 4 -->
+          <div class="timeline-item" data-aos="fade-up">
+            <div class="timeline-dot"></div>
+            <div class="glass-card p-4">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <div>
+                  <h4 class="mb-1 text-gradient">Java Developer (Intern)</h4>
+                  <p class="mb-0 text-white font-monospace fs-6">
+                    <strong>Precursor Info Solutions</strong>
+                  </p>
+                </div>
+                <span class="company-badge">Sept 2021 – Jan 2022</span>
+              </div>
+              <ul class="text-muted-custom fs-6 mb-0 ps-3">
+                <li class="mb-2">Developed a college portal using JSP, Servlets, and JDBC focusing on robust backend-frontend connectivity.</li>
+                <li>Utilized MVC architecture, Eclipse IDE, Apache Server, and SQLWorkbench for database management.</li>
               </ul>
             </div>
           </div>
@@ -245,233 +314,271 @@
 
     <!-- Tech Skills Section -->
     <section id="skills" class="py-5">
-      <div class="container progress-bar-container" data-aos="fade-up">
-        <h2 class="mb-5 text-center">Tech Skills</h2>
-        <div class="row g-4">
-          <div class="col-md-6">
-            <label class="form-label">PHP</label>
-            <div class="progress rounded-pill">
-              <div class="progress-bar progressBar" data-progress="90">90%</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">React</label>
-            <div class="progress rounded-pill">
-              <div class="progress-bar progressBar" data-progress="75">75%</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">Java / Advance Java</label>
-            <div class="progress rounded-pill">
-              <div class="progress-bar progressBar" data-progress="80">80%</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">Node.js</label>
-            <div class="progress rounded-pill">
-              <div class="progress-bar progressBar" data-progress="75">75%</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label mt-3">MongoDB / SQL</label>
-            <div class="progress rounded-pill">
-              <div class="progress-bar progressBar" data-progress="80">80%</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">HTML5</label>
-            <div class="progress rounded-pill">
-              <div class="progress-bar progressBar" data-progress="95">95%</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">CSS3</label>
-            <div class="progress rounded-pill">
-              <div class="progress-bar progressBar" data-progress="95">95%</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">JavaScript</label>
-            <div class="progress rounded-pill">
-              <div class="progress-bar progressBar" data-progress="90">90%</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">JQuery</label>
-            <div class="progress rounded-pill">
-              <div class="progress-bar progressBar" data-progress="85">85%</div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label mt-3">AWS / Docker / Git</label>
-            <div class="progress rounded-pill">
-              <div class="progress-bar progressBar" data-progress="75">75%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education" class="py-5">
       <div class="container" data-aos="fade-up">
-        <h2 class="mb-5 text-center">Education</h2>
-        <div class="row g-4">
-          <div class="col-md-6">
-            <div
-              class="blockDiv rounded-4 p-4 shadow-sm h-100"
-              data-aos="fade-up-right"
-            >
-              <h5 class="text-gradient">
-                Bachelor of Technology in Computer Science
-              </h5>
-              <p class="mb-1"><strong>Babu Banarasi Das University</strong></p>
-              <p class="text-info">2018 – 2022</p>
-              <p>
-                Graduated with a strong focus on software development, data
-                structures, and system design.
-              </p>
+        <div class="section-title-wrap">
+          <div class="section-tag">Technical Proficiency</div>
+          <h2>Skills & Expertise</h2>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div class="filter-pill-group">
+          <button class="filter-btn active" onclick="filterSkills('all', this)">All Technologies</button>
+          <button class="filter-btn" onclick="filterSkills('ai', this)">AI & LLMs</button>
+          <button class="filter-btn" onclick="filterSkills('backend', this)">Backend & APIs</button>
+          <button class="filter-btn" onclick="filterSkills('frontend', this)">Frontend</button>
+          <button class="filter-btn" onclick="filterSkills('cloud', this)">Cloud & DB</button>
+        </div>
+
+        <div class="row g-4" id="skillsGrid">
+          <!-- Skill Items -->
+          <div class="col-md-6 skill-item" data-category="backend ai">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-filetype-py me-2 text-gradient"></i> Python & FastAPI</span>
+                <span class="skill-pct">90%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="90"></div>
+              </div>
             </div>
           </div>
 
-          <div class="col-md-6">
-            <div
-              class="blockDiv rounded-4 p-4 shadow-sm h-100"
-              data-aos="fade-up-left"
-            >
-              <h5 class="text-gradient">Higher Secondary (PCM)</h5>
-              <p class="mb-1"><strong>Exon Montessori Inter College</strong></p>
-              <p class="text-info">2016 – 2018</p>
-              <p>
-                Completed 12th with Mathematics and Computer Science. Active in
-                coding clubs and competitions.
-              </p>
+          <div class="col-md-6 skill-item" data-category="ai">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-robot me-2 text-gradient"></i> LangChain / LangGraph / MCP</span>
+                <span class="skill-pct">88%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="88"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 skill-item" data-category="backend">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-code-slash me-2 text-gradient"></i> PHP</span>
+                <span class="skill-pct">88%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="88"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 skill-item" data-category="frontend">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-boxes me-2 text-gradient"></i> React / Tailwind CSS / shadcn/ui</span>
+                <span class="skill-pct">85%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="85"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 skill-item" data-category="backend">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-cup-hot me-2 text-gradient"></i> Java / J2EE / JDBC</span>
+                <span class="skill-pct">80%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="80"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 skill-item" data-category="backend">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-server me-2 text-gradient"></i> Node.js & REST APIs</span>
+                <span class="skill-pct">80%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="80"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 skill-item" data-category="cloud">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-database me-2 text-gradient"></i> MongoDB & SQL Databases</span>
+                <span class="skill-pct">85%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="85"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 skill-item" data-category="frontend">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-filetype-html me-2 text-gradient"></i> HTML5 & CSS3</span>
+                <span class="skill-pct">95%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="95"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 skill-item" data-category="frontend">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-filetype-js me-2 text-gradient"></i> JavaScript (ES6+)</span>
+                <span class="skill-pct">90%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="90"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 skill-item" data-category="cloud">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-cloud-check me-2 text-gradient"></i> AWS / Docker / Git</span>
+                <span class="skill-pct">80%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="80"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 skill-item" data-category="backend">
+            <div class="glass-card skill-card">
+              <div class="skill-header">
+                <span class="skill-name"><i class="bi bi-credit-card me-2 text-gradient"></i> Stripe Billing / OAuth 2.1 / SSO</span>
+                <span class="skill-pct">88%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-bar-fill" data-progress="88"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Achievements Section -->
-    <section id="achievements" class="py-5">
-      <div class="container" data-aos="fade-up">
-        <h2 class="mb-5 text-center">Achievements</h2>
-        <div class="row g-4">
-          <div class="col-md-6">
-            <div
-              class="blockDiv rounded-4 p-4 border-start border-4 border-info shadow-sm h-100"
-            >
-              <h5 class="mb-2">📘 Published Author</h5>
-              <p class="text-light">
-                Published 3 books on Kindle: poetry, short stories, and
-                reflections life.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div
-              class="blockDiv rounded-4 p-4 border-start border-4 border-success shadow-sm h-100"
-            >
-              <h5 class="mb-2">Core Cordinator Aaina</h5>
-              <p class="text-light">
-                Part of the Aaina Community, Literary Department, BBD University
-                as the Core Coordinator (Organized campus-wide literary
-                competitions & events).
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- GitHub Projects -->
+    <!-- Projects Section -->
     <section id="projects" class="py-5">
       <div class="container" data-aos="fade-up">
-        <h2 class="mb-5 text-center">Projects</h2>
+        <div class="section-title-wrap">
+          <div class="section-tag">Featured Work</div>
+          <h2>Selected Projects</h2>
+        </div>
+
         <div class="row g-4">
-          <div class="col-md-4">
-            <div class="blockDiv p-4 rounded-4 shadow-sm h-100">
-              <h5 class="text-gradient">FloatingCards - LearnSynonyms</h5>
-              <p>
-                Developed using HTML, CSS and JS. This simple project uses JS
-                for its dynamic working, rendering the txt file to display the
-                synonyms. Event listeners are added at each event.
-              </p>
-              <div class="d-flex justify-content-between">
-                <a
-                  href="https://mak2506.github.io/FloatingCards/#"
-                  class="btn btn-sm btn-outline-light mt-2"
-                  target="_blank"
-                  >View Project</a
-                >
-                <a
-                  href="https://github.com/mak2506/FloatingCards"
-                  class="btn btn-sm btn-outline-light mt-2"
-                  target="_blank"
-                  >View Source Code</a
-                >
+          <!-- Project 1 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="glass-card project-card">
+              <div class="project-card-body">
+                <div class="fs-3 mb-2"><i class="bi bi-stars text-gradient"></i></div>
+                <h4 class="mb-2">AI Content Generation Platform</h4>
+                <p class="text-muted-custom fs-6">
+                  FastAPI-based platform for marketplace listings using LangChain workflows, context boundaries, validation guardrails, and Tavily real-time web search for automated SEO content pipelines.
+                </p>
+                <div class="tech-tag-group">
+                  <span class="tech-tag">FastAPI</span>
+                  <span class="tech-tag">LangChain</span>
+                  <span class="tech-tag">Tavily</span>
+                  <span class="tech-tag">RAG</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="col-md-4">
-            <div class="blockDiv p-4 rounded-4 shadow-sm h-100">
-              <h5 class="text-gradient">
-                LearnAntonyms -Hoverable Floating Cards
-              </h5>
-              <p>
-                This project is developed using HTML, CSS, and JS for
-                dynamically rendering data and adding effects on each event.
-              </p>
-              <div class="d-flex justify-content-between">
-                <a
-                  href="https://mak2506.github.io/LearningAntonyms/index.html"
-                  class="btn btn-sm btn-outline-light mt-2"
-                  target="_blank"
-                  >View Project</a
-                >
-                <a
-                  href="https://github.com/mak2506/LearningAntonyms"
-                  class="btn btn-sm btn-outline-light mt-2"
-                  target="_blank"
-                  >View Source Cosw</a
-                >
+          <!-- Project 2 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="glass-card project-card">
+              <div class="project-card-body">
+                <div class="fs-3 mb-2"><i class="bi bi-chat-square-quote text-gradient"></i></div>
+                <h4 class="mb-2">Fluduro – ChatGPT Application</h4>
+                <p class="text-muted-custom fs-6">
+                  Interactive personality-to-flower quiz app powered by OpenAI Apps SDK & Groq. Features an MCP server with 5 tools & 2 resources, delivering custom interactive ChatGPT widgets.
+                </p>
+                <div class="tech-tag-group mb-3">
+                  <span class="tech-tag">OpenAI Apps SDK</span>
+                  <span class="tech-tag">MCP</span>
+                  <span class="tech-tag">Groq AI</span>
+                </div>
+                <div class="d-flex gap-2 mt-auto">
+                  <a href="https://github.com/mak2506/fluduro" target="_blank" class="btn btn-sm btn-outline-glass w-100">
+                    <i class="bi bi-github me-1"></i> View Source Code
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="col-md-4">
-            <div class="blockDiv p-4 rounded-4 shadow-sm h-100">
-              <h5 class="text-gradient">Weather Dashboard (React)</h5>
-              <p>
-                A responsive React.js application offering real-time weather and
-                a 5-day forecast. Integrates the OpenWeatherMap API for data,
-                geolocation for auto-detection, and pure CSS for a rich,
-                adaptive user experience.
-              </p>
-              <div class="d-flex justify-content-between">
-                <a
-                  href="https://mak2506.github.io/weather-app/"
-                  class="btn btn-sm btn-outline-light mt-2"
-                  target="_blank"
-                  >View Project</a
-                >
-                <a
-                  href="https://github.com/mak2506/weather-app"
-                  class="btn btn-sm btn-outline-light mt-2"
-                  target="_blank"
-                  >View Source Code</a
-                >
+          <!-- Project 3 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="glass-card project-card">
+              <div class="project-card-body">
+                <div class="fs-3 mb-2"><i class="bi bi-clouds text-gradient"></i></div>
+                <h4 class="mb-2">Weather Dashboard (React)</h4>
+                <p class="text-muted-custom fs-6">
+                  Responsive React.js web app offering real-time weather & 5-day forecast using OpenWeatherMap API, geolocation detection, and adaptive CSS glass aesthetics.
+                </p>
+                <div class="tech-tag-group mb-3">
+                  <span class="tech-tag">React.js</span>
+                  <span class="tech-tag">OpenWeatherMap</span>
+                  <span class="tech-tag">CSS3</span>
+                </div>
+                <div class="d-flex gap-2">
+                  <a href="https://mak2506.github.io/weather-app/" target="_blank" class="btn btn-sm btn-outline-glass flex-grow-1">Live Demo</a>
+                  <a href="https://github.com/mak2506/weather-app" target="_blank" class="btn btn-sm btn-outline-glass"><i class="bi bi-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="col-lg-6 col-md-6">
+            <div class="glass-card project-card">
+              <div class="project-card-body">
+                <div class="fs-3 mb-2"><i class="bi bi-layers text-gradient"></i></div>
+                <h4 class="mb-2">FloatingCards - LearnSynonyms</h4>
+                <p class="text-muted-custom fs-6">
+                  Interactive web utility built with vanilla HTML, CSS, and JS. Dynamically renders txt dataset file to display synonyms with event listeners and smooth card transitions.
+                </p>
+                <div class="tech-tag-group mb-3">
+                  <span class="tech-tag">HTML5</span>
+                  <span class="tech-tag">CSS3</span>
+                  <span class="tech-tag">JavaScript</span>
+                </div>
+                <div class="d-flex gap-2">
+                  <a href="https://mak2506.github.io/FloatingCards/#" target="_blank" class="btn btn-sm btn-outline-glass flex-grow-1">Live Project</a>
+                  <a href="https://github.com/mak2506/FloatingCards" target="_blank" class="btn btn-sm btn-outline-glass"><i class="bi bi-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div class="col-lg-6 col-md-6">
+            <div class="glass-card project-card">
+              <div class="project-card-body">
+                <div class="fs-3 mb-2"><i class="bi bi-card-text text-gradient"></i></div>
+                <h4 class="mb-2">LearnAntonyms - Floating Cards</h4>
+                <p class="text-muted-custom fs-6">
+                  Hoverable floating cards project utilizing JS for dynamic dataset rendering and micro-interaction effects on mouse events.
+                </p>
+                <div class="tech-tag-group mb-3">
+                  <span class="tech-tag">HTML5</span>
+                  <span class="tech-tag">CSS Animation</span>
+                  <span class="tech-tag">JavaScript</span>
+                </div>
+                <div class="d-flex gap-2">
+                  <a href="https://mak2506.github.io/LearningAntonyms/index.html" target="_blank" class="btn btn-sm btn-outline-glass flex-grow-1">Live Project</a>
+                  <a href="https://github.com/mak2506/LearningAntonyms" target="_blank" class="btn btn-sm btn-outline-glass"><i class="bi bi-github"></i></a>
+                </div>
               </div>
             </div>
           </div>
@@ -479,107 +586,114 @@
       </div>
     </section>
 
-    <!-- Blogs Section -->
-    <!-- <section id="blogs" class="py-5">
-  <div class="container" data-aos="fade-up">
-    <h2 class="mb-5 text-center">Blog Posts</h2>
-    <div class="row g-4">
-
-      <div class="col-md-6">
-        <div class="blockDiv rounded-4 p-4 shadow-sm h-100">
-          <h5 class="text-gradient">Writing Code Like Poetry</h5>
-          <p>Exploring how clean code is just like writing a beautiful poem.</p>
-          <a href="https://yourblog.com/post1" class="btn btn-sm btn-outline-light mt-2" target="_blank">Read Blog</a>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="blockDiv rounded-4 p-4 shadow-sm h-100">
-          <h5 class="text-gradient">Laravel Design Patterns</h5>
-          <p>A deep dive into the Template Pattern and reusable service-oriented architecture.</p>
-          <a href="https://yourblog.com/post2" class="btn btn-sm btn-outline-light mt-2" target="_blank">Read Blog</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section> -->
-
+    <!-- Featured Publications & Blog Links -->
     <section id="blogs" class="py-5">
-      <div class="container my-5">
-        <h2 class="mb-5 text-center">🌐 Featured Links</h2>
+      <div class="container" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <div class="section-tag">Author & Writing</div>
+          <h2>Featured Publications</h2>
+        </div>
+
         <div class="row g-4">
           <!-- Card 1 -->
-          <div class="col-md-6 col-lg-4" data-aos="fade-left">
-            <div class="card text-white border-0 shadow-lg rounded-4 h-100">
-              <img
-                src="img/Colourful Berries-NightSymphonies.jpg"
-                class="card-img-top rounded-top-4"
-                alt="Project Image"
-              />
-              <div class="card-body">
-                <h5 class="card-title">
-                  7 Years of Writing: From Blogging to Publishing, and Beyond
-                </h5>
-                <p class="card-text">
-                  From sharing my first blog post to holding three
-                  self-published books under my name, these past seven years
-                  have been nothing short of magical.
+          <div class="col-md-4">
+            <div class="glass-card project-card">
+              <div class="project-card-img-wrap">
+                <img src="img/Colourful Berries-NightSymphonies.jpg" class="project-card-img" alt="7 Years of Writing" />
+              </div>
+              <div class="project-card-body">
+                <h5 class="card-title mb-2">7 Years of Writing: From Blogging to Publishing</h5>
+                <p class="text-muted-custom fs-6">
+                  Reflections on a 7-year journey from sharing initial blog posts to self-publishing 3 books on Amazon Kindle.
                 </p>
-                <a
-                  href="https://www.linkedin.com/feed/update/urn:li:activity:7289699544622080002/"
-                  target="_blank"
-                  class="text-gradient btn w-100"
-                  >View Post</a
-                >
+                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7289699544622080002/" target="_blank" class="btn-glow btn-sm w-100 text-center justify-content-center mt-auto">Read on LinkedIn</a>
               </div>
             </div>
           </div>
 
           <!-- Card 2 -->
-          <div class="col-md-6 col-lg-4" data-aos="fade-left">
-            <div class="card text-white border-0 shadow-lg rounded-4 h-100">
-              <img
-                src="img/4be0cd8ca4d90c73bbd3e61c8566144b.jpg"
-                class="card-img-top rounded-top-4"
-                alt="Blog Thumbnail"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Amazon Author Profile: Mansi Kumari</h5>
-                <p class="card-text">
-                  Visit my author profile at Amazon Authors and check out my
-                  creative works
+          <div class="col-md-4">
+            <div class="glass-card project-card">
+              <div class="project-card-img-wrap">
+                <img src="img/4be0cd8ca4d90c73bbd3e61c8566144b.jpg" class="project-card-img" alt="Amazon Kindle Author Profile" />
+              </div>
+              <div class="project-card-body">
+                <h5 class="card-title mb-2">Amazon Author Profile</h5>
+                <p class="text-muted-custom fs-6">
+                  Explore Mansi Kumari's 3 published books available on Amazon Kindle—blending poetry, short stories, and life observations.
                 </p>
-                <a
-                  href="https://www.amazon.com/stores/author/B08T7GHFZ2"
-                  target="_blank"
-                  class="text-gradient btn w-100"
-                  >Visit Profile</a
-                >
+                <a href="https://www.amazon.com/stores/author/B08T7GHFZ2" target="_blank" class="btn-glow btn-sm w-100 text-center justify-content-center mt-auto">Visit Author Page</a>
               </div>
             </div>
           </div>
 
-          <!-- Card 2 -->
-          <div class="col-md-6 col-lg-4" data-aos="fade-left">
-            <div class="card text-white border-0 shadow-lg rounded-4 h-100">
-              <img
-                src="img/write2.jpg"
-                class="card-img-top rounded-top-4"
-                alt="Blog Thumbnail"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Blog: StoryBooksMania</h5>
-                <p class="card-text">
-                  Step into a world where every word holds magic, every verse
-                  sings a melody, and every story paints a picture.
+          <!-- Card 3 -->
+          <div class="col-md-4">
+            <div class="glass-card project-card">
+              <div class="project-card-img-wrap">
+                <img src="img/write2.jpg" class="project-card-img" alt="StoryBooksMania Blog" />
+              </div>
+              <div class="project-card-body">
+                <h5 class="card-title mb-2">Blog: StoryBooksMania</h5>
+                <p class="text-muted-custom fs-6">
+                  Step into a world where words hold magic, every verse sings a melody, and stories paint vivid pictures.
                 </p>
-                <a
-                  href="https://storybooksmania.blogspot.com/"
-                  target="_blank"
-                  class="text-gradient btn w-100"
-                  >Read More</a
-                >
+                <a href="https://storybooksmania.blogspot.com/" target="_blank" class="btn-glow btn-sm w-100 text-center justify-content-center mt-auto">Read Blogspot</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Achievements -->
+    <section id="education" class="py-5">
+      <div class="container" data-aos="fade-up">
+        <div class="row g-4">
+          <!-- Education Column -->
+          <div class="col-lg-6">
+            <div class="section-title-wrap text-start mb-4">
+              <div class="section-tag">Background</div>
+              <h2>Education</h2>
+            </div>
+            
+            <div class="d-flex flex-column gap-3">
+              <div class="glass-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h5 class="mb-0 text-gradient">B.Tech in Computer Science</h5>
+                  <span class="company-badge">2018 – 2022</span>
+                </div>
+                <p class="mb-1 text-white font-monospace">Babu Banarasi Das University</p>
+                <p class="text-muted-custom fs-6 mb-0">Graduated with a strong foundation in software engineering, data structures, algorithms, and system design.</p>
+              </div>
+
+              <div class="glass-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h5 class="mb-0 text-gradient">Higher Secondary (PCM)</h5>
+                  <span class="company-badge">2016 – 2018</span>
+                </div>
+                <p class="mb-1 text-white font-monospace">Exon Montessori Inter College</p>
+                <p class="text-muted-custom fs-6 mb-0">Completed 12th standard with Mathematics & Computer Science specialization.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Achievements Column -->
+          <div class="col-lg-6">
+            <div class="section-title-wrap text-start mb-4">
+              <div class="section-tag">Milestones</div>
+              <h2>Achievements</h2>
+            </div>
+
+            <div class="d-flex flex-column gap-3">
+              <div class="glass-card p-4 border-start border-4 border-info">
+                <h5 class="mb-2 text-gradient"><i class="bi bi-book me-2"></i> Published Kindle Author</h5>
+                <p class="text-muted-custom fs-6 mb-0">Self-published 3 books on Amazon Kindle spanning poetry, short stories, and philosophical life reflections.</p>
+              </div>
+
+              <div class="glass-card p-4 border-start border-4 border-success">
+                <h5 class="mb-2 text-gradient"><i class="bi bi-award me-2"></i> Core Coordinator, Aaina Literary Dept</h5>
+                <p class="text-muted-custom fs-6 mb-0">Led campus-wide literary competitions, public speaking events, and creative workshops at BBD University.</p>
               </div>
             </div>
           </div>
@@ -590,86 +704,91 @@
     <!-- Hobbies Section -->
     <section id="hobbies" class="py-5">
       <div class="container" data-aos="fade-up">
-        <h2 class="mb-5 text-center">Hobbies</h2>
-        <div class="row text-center g-4">
-          <div class="col-md-3" data-aos="zoom-in">
-            <div class="hobbiesDiv border rounded-4 p-4 shadow-sm h-100">
-              <i class="bi bi-pencil-square fs-1 text-gradient"></i>
-              <p class="mt-3">Writing stories, blogs, and poetry</p>
+        <div class="section-title-wrap">
+          <div class="section-tag">Beyond Coding</div>
+          <h2>Hobbies & Interests</h2>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-6 col-md-3">
+            <div class="glass-card hobby-card">
+              <div class="hobby-icon"><i class="bi bi-pencil-square"></i></div>
+              <h6 class="mb-0">Creative Writing</h6>
+              <small class="text-muted-custom">Poetry & Stories</small>
             </div>
           </div>
 
-          <div class="col-md-3" data-aos="zoom-in">
-            <div class="hobbiesDiv border rounded-4 p-4 shadow-sm h-100">
-              <i class="bi bi-code-slash fs-1 text-gradient"></i>
-              <p class="mt-3">Exploring new frameworks and patterns</p>
+          <div class="col-6 col-md-3">
+            <div class="glass-card hobby-card">
+              <div class="hobby-icon"><i class="bi bi-cpu"></i></div>
+              <h6 class="mb-0">Tech Exploration</h6>
+              <small class="text-muted-custom">AI & Agentic Systems</small>
             </div>
           </div>
 
-          <div class="col-md-3" data-aos="zoom-in">
-            <div class="hobbiesDiv border rounded-4 p-4 shadow-sm h-100">
-              <i class="bi bi-controller fs-1 text-gradient"></i>
-              <p class="mt-3">Coding, designing and logic puzzle solving</p>
+          <div class="col-6 col-md-3">
+            <div class="glass-card hobby-card">
+              <div class="hobby-icon"><i class="bi bi-puzzle"></i></div>
+              <h6 class="mb-0">Logic Puzzles</h6>
+              <small class="text-muted-custom">Problem Solving</small>
             </div>
           </div>
 
-          <div class="col-md-3" data-aos="zoom-in">
-            <div class="hobbiesDiv border rounded-4 p-4 shadow-sm h-100">
-              <i class="bi bi-music-note-beamed fs-1 text-gradient"></i>
-              <p class="mt-3">Photography, Art, Craft, Music</p>
+          <div class="col-6 col-md-3">
+            <div class="glass-card hobby-card">
+              <div class="hobby-icon"><i class="bi bi-camera"></i></div>
+              <h6 class="mb-0">Art & Music</h6>
+              <small class="text-muted-custom">Photography & Crafts</small>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <footer class="footer text-light py-5">
+    <!-- Footer -->
+    <footer class="footer-custom">
       <div class="container text-center">
-        <h3 class="mb-4 text-gradient">Get in Touch</h3>
-        <p class="mb-3">Let’s connect across platforms 🚀</p>
+        <h2 class="text-gradient mb-3">Let's Connect & Collaborate</h2>
+        <p class="text-muted-custom mb-4">Open for AI engineering roles, speaking engagements, and creative writing projects.</p>
 
-        <div
-          class="social-icons fs-5 d-flex justify-content-center flex-wrap gap-4 mb-4 fs-5"
-        >
-          <a
-            href="mailto:techwithmak25@gmail.com"
-            class="text-gradient text-decoration-none"
-          >
+        <div class="d-flex justify-content-center gap-3 mb-4">
+          <a href="mailto:techwithmak25@gmail.com" class="social-icon-btn" title="Email Me">
             <i class="fa fa-envelope"></i>
           </a>
-          <a
-            href="https://github.com/mak2506"
-            target="_blank"
-            class="text-gradient text-decoration-none"
-          >
+          <a href="https://github.com/mak2506" target="_blank" class="social-icon-btn" title="GitHub">
             <i class="fa fa-github"></i>
           </a>
-          <a
-            href="https://linkedin.com/in/mansi-kumari"
-            target="_blank"
-            class="text-gradient text-decoration-none"
-          >
-            <i class="fa fa-linkedin-square"></i>
+          <a href="https://linkedin.com/in/mansi-kumari" target="_blank" class="social-icon-btn" title="LinkedIn">
+            <i class="fa fa-linkedin"></i>
           </a>
-          <a
-            href="https://instagram.com/im_mankum"
-            target="_blank"
-            class="text-gradient text-decoration-none"
-          >
+          <a href="https://instagram.com/im_mankum" target="_blank" class="social-icon-btn" title="Instagram">
             <i class="fa fa-instagram"></i>
           </a>
         </div>
 
-        <small>&copy; 2025 Mansi Kumari All rights reserved.</small>
+        <small class="text-muted-custom">&copy; 2026 Mansi Kumari. Designed & Built with Excellence.</small>
       </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+      <i class="bi bi-arrow-up-short"></i>
+    </div>
+
+    <!-- Toast Alert Container -->
+    <div class="toast-custom" id="toastAlert">
+      <i class="bi bi-check-circle-fill text-success fs-5"></i>
+      <span id="toastMessage">Email copied to clipboard!</span>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      AOS.init();
+      AOS.init({ duration: 800, once: true });
     </script>
     <script src="js/script.js"></script>
     <script src="js/anime.js"></script>
+    <script src="js/liquid.js"></script>
   </body>
 </html>
